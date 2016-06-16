@@ -27,6 +27,8 @@ var removeEntitiesAtEdges = require('removeEntitiesAtEdges');
 var removeRangeFromContentState = require('removeRangeFromContentState');
 var setBlockTypeForContentState = require('setBlockTypeForContentState');
 var splitBlockInContentState = require('splitBlockInContentState');
+var moveBlockBeforeInContentState = require('moveBlockBeforeInContentState');
+var moveBlockAfterInContentState = require('moveBlockAfterInContentState');
 
 import type {BlockMap} from 'BlockMap';
 import type ContentState from 'ContentState';
@@ -172,6 +174,30 @@ var DraftModifier = {
     return splitBlockInContentState(
       withoutText,
       withoutText.getSelectionAfter()
+    );
+  },
+
+  moveBlockBefore: function(
+    contentState: ContentState,
+    selectionState: SelectionState,
+    contentBlock: ContentBlock
+  ): ContentState {
+    return moveBlockBeforeInContentState(
+      contentState,
+      selectionState,
+      contentBlock
+    );
+  },
+
+  moveBlockAfter: function(
+    contentState: ContentState,
+    selectionState: SelectionState,
+    contentBlock: ContentBlock
+  ): ContentState {
+    return moveBlockAfterInContentState(
+      contentState,
+      selectionState,
+      contentBlock
     );
   },
 
