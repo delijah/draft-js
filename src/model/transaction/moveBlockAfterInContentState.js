@@ -35,8 +35,8 @@ function moveBlockAfterInContentState(
   var blockMap = contentState.getBlockMap();
   var blockToBeMoved = blockMap.get(key);
   var blocksWithoutBlockToBeMoved = blockMap.delete(blockToBeMoved.getKey());
-  var blocksBefore = blockMap.toSeq().takeUntil(v => v === blockToBeMoved);
-  var blocksAfter = blockMap.toSeq().skipUntil(v => v === blockToBeMoved);
+  var blocksBefore = blocksWithoutBlockToBeMoved.toSeq().takeUntil(v => v === contentBlock);
+  var blocksAfter = blocksWithoutBlockToBeMoved.toSeq().skipUntil(v => v === contentBlock);
   var newBlocks = blocksBefore.concat(
       [[contentBlock.getKey(), contentBlock], [blockToBeMoved.getKey(), blockToBeMoved]],
       blocksAfter
