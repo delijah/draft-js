@@ -132,6 +132,40 @@ const AtomicBlockUtils = {
 
     return EditorState.push(editorState, newContent, 'insert-fragment');
   },
+
+  moveAtomicBlockBefore: function(
+    editorState: EditorState,
+    contentBlock: ContentBlock
+  ): EditorState {
+    const contentState = editorState.getCurrentContent();
+    const selectionState = editorState.getSelection();
+
+    const withMovedAtomicBlock = DraftModifier.moveBlockBefore(contentState, selectionState, contentBlock);
+
+    const newContent = withMovedAtomicBlock.merge({
+      selectionBefore: selectionState,
+      selectionAfter: withMovedAtomicBlock.getSelectionAfter().set('hasFocus', true),
+    });
+
+    return EditorState.push(editorState, newContent, 'change-fragment');
+  },
+  
+  moveAtomicBlockAfter: function(
+    editorState: EditorState,
+    contentBlock: ContentBlock
+  ): EditorState {
+    const contentState = editorState.getCurrentContent();
+    const selectionState = editorState.getSelection();
+
+    const withMovedAtomicBlock = DraftModifier.moveBlockAfter(contentState, selectionState, contentBlock);
+
+    const newContent = withMovedAtomicBlock.merge({
+      selectionBefore: selectionState,
+      selectionAfter: withMovedAtomicBlock.getSelectionAfter().set('hasFocus', true),
+    });
+
+    return EditorState.push(editorState, newContent, 'change-fragment');
+  },
 };
 
 module.exports = AtomicBlockUtils;

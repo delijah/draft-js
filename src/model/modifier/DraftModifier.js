@@ -29,6 +29,8 @@ var setBlockTypeForContentState = require('setBlockTypeForContentState');
 var splitBlockInContentState = require('splitBlockInContentState');
 var insertBlockBeforeInContentState = require('insertBlockBeforeInContentState');
 var insertBlockAfterInContentState = require('insertBlockAfterInContentState');
+var moveBlockBeforeInContentState = require('moveBlockBeforeInContentState');
+var moveBlockAfterInContentState = require('moveBlockAfterInContentState');
 
 import type {BlockMap} from 'BlockMap';
 import type ContentBlock from 'ContentBlock';
@@ -196,6 +198,30 @@ var DraftModifier = {
     contentBlock: ContentBlock
   ): ContentState {
     return insertBlockAfterInContentState(
+      contentState,
+      selectionState,
+      contentBlock
+    );
+  },
+
+  moveBlockBefore: function(
+    contentState: ContentState,
+    selectionState: SelectionState,
+    contentBlock: ContentBlock
+  ): ContentState {
+    return moveBlockBeforeInContentState(
+      contentState,
+      selectionState,
+      contentBlock
+    );
+  },
+
+  moveBlockAfter: function(
+    contentState: ContentState,
+    selectionState: SelectionState,
+    contentBlock: ContentBlock
+  ): ContentState {
+    return moveBlockAfterInContentState(
       contentState,
       selectionState,
       contentBlock
